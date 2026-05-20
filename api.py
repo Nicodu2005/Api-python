@@ -1,6 +1,8 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import joblib
 import pandas as pd
+
 
 app = FastAPI(
     title="API IA Ecommerce",
@@ -8,6 +10,18 @@ app = FastAPI(
     version="1.0"
 )
 
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+historiaUsuario = []
+id_usuario = 1 
 # -------------------------------
 # CARGAR MODELO
 modelo = joblib.load("modelo_rf.pkl")
@@ -56,7 +70,7 @@ def interpretar_usuario(usuario, prob):
 # ENDPOINT PRINCIPAL
 @app.post("/predict")
 def predecir(data: dict):
-
+    global id_usuario
     usuario = pd.DataFrame([{
         "Precio del producto": data["precio"],
         "Tiempo en página": data["tiempo"],
@@ -72,7 +86,8 @@ def predecir(data: dict):
     usuario_fila = usuario.iloc[0].values
     perfil, nivel, tipo, accion = interpretar_usuario(usuario_fila, prob)
 
-    return {
+    respuesta = {
+         "id": id_usuario,
         "probabilidad_compra": round(prob, 3),
         "prediccion": pred,
         "perfil_usuario": perfil,
@@ -80,3 +95,15 @@ def predecir(data: dict):
         "tipo_producto": tipo,
         "accion_recomendada": accion
     }
+
+    historiaUsuario.append(respuesta)
+    id_usuario +=1
+    return respuesta
+
+
+# -------------------------------
+# ENDPOINT GET Historia
+
+@app.get("/historial")
+def historial():
+    return historiaUsuario
