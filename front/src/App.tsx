@@ -131,64 +131,67 @@ function App() {
         onSubmit={handleSubmit}
         className="w-full max-w-2xl bg-white text-gray-800 rounded-2xl shadow-xl p-6 flex flex-col gap-4"
       >
-        <label className="font-semibold">💰 Precio</label>
+        <label className="font-semibold">💰 Precio del Producto (Monto)</label>
         <input
           className="p-2 rounded-lg border focus:ring-2 focus:ring-cyan-400"
           value={FormPredict.precio}
           onChange={handleChange}
           name="precio"
+          placeholder="Ej. 150"
         />
 
-        <label className="font-semibold">⏱️ Tiempo (min)</label>
+        <label className="font-semibold">⏱️ Tiempo de Navegación (Minutos)</label>
         <input
           className="p-2 rounded-lg border focus:ring-2 focus:ring-cyan-400"
           value={FormPredict.tiempo}
           onChange={handleChange}
           name="tiempo"
+          placeholder="Ej. 12"
         />
 
-        <label className="font-semibold">📦 Productos</label>
+        <label className="font-semibold">📦 Cantidad de Productos Visualizados</label>
         <input
           className="p-2 rounded-lg border focus:ring-2 focus:ring-cyan-400"
           value={FormPredict.productos}
           onChange={handleChange}
           name="productos"
+          placeholder="Ej. 5"
         />
 
-        <label className="font-semibold">👕 Categoría</label>
+        <label className="font-semibold">👕 Categoría de Interés</label>
         <select
           className="p-2 rounded-lg border focus:ring-2 focus:ring-cyan-400"
           name="categoria"
           value={FormPredict.categoria}
           onChange={handleChange}
         >
-          <option value="">Selecciona</option>
+          <option value="">Selecciona una opción</option>
           <option value="0">Formal</option>
           <option value="1">Casual</option>
           <option value="2">Sport</option>
         </select>
 
-        <label className="font-semibold">📱 Dispositivo</label>
+        <label className="font-semibold">📱 Dispositivo de Conexión</label>
         <select
           className="p-2 rounded-lg border focus:ring-2 focus:ring-cyan-400"
           name="dispositivo"
           value={FormPredict.dispositivo}
           onChange={handleChange}
         >
-          <option value="">Selecciona</option>
+          <option value="">Selecciona una opción</option>
           <option value="0">Celular</option>
           <option value="1">Tablet</option>
           <option value="2">PC</option>
         </select>
 
-        <label className="font-semibold">🕒 Hora</label>
+        <label className="font-semibold">🕒 Momento del Día de la Visita</label>
         <select
           className="p-2 rounded-lg border focus:ring-2 focus:ring-cyan-400"
           name="hora"
           value={FormPredict.hora}
           onChange={handleChange}
         >
-          <option value="">Selecciona</option>
+          <option value="">Selecciona una opción</option>
           <option value="0">Mañana</option>
           <option value="1">Tarde</option>
           <option value="2">Noche</option>
@@ -198,7 +201,7 @@ function App() {
           type="submit"
           className="mt-4 bg-cyan-500 text-white py-2 rounded-lg font-semibold hover:bg-cyan-600 hover:scale-105 transition"
         >
-          🔍 Predecir
+          🔍 Predecir Compra
         </button>
       </form>
 
